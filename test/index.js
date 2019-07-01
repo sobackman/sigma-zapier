@@ -11,16 +11,31 @@ describe('My App', () => {
 	it('should test something', (done) => {
 		const bundle = {};
 
-		appTester(App.resources.status.operation.perform, bundle)
+		appTester(App.searches.pulse.operation.perform, bundle)
 	  		.then(results => {
-			    should(results.length).above(1);
+				console.log(`Result ${results.length}`)
+			    should(results.length).equal(1);
 
 			    const firstResult = results[0];
 			    console.log('test result: ', firstResult)
-			    should(firstResult.name).eql('name 1');
-			    should(firstResult.directions).eql('directions 1');
+			    should(firstResult.email).eql('email5@email.com');
 
 		    	done();
 	  		}).catch(done);
 	});
+
+	it('should load get pulses', (done) => {
+		const bundle = {};
+	
+		appTester(App.triggers.pulses.operation.perform, bundle)
+		  .then(results => {
+			should(results.length).above(1);
+	
+			const firstResult = results[0];
+			console.log('test result: ', firstResult)
+	
+			done();
+		  })
+		  .catch(done);
+	  });
 });
