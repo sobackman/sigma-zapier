@@ -1,6 +1,11 @@
 let page = 1
 let result = []
-let user = {}
+let user = {
+  name: '',
+  email: '',
+  pulse_id: '',
+  board_id: '' 
+}
 
 const mondaySearch = (z, bundle) => {
     const promise = z.request({
@@ -12,15 +17,17 @@ const mondaySearch = (z, bundle) => {
 
     return promise.then(response => {
         if (!response.json[0]) {
-            return []
+          result.push(user)
+          return result
         } 
         else { 
             const mondayUsers = response.json
                 mondayUsers: 
                 for (mondayUser of mondayUsers) {
                     for (column of mondayUser.column_values) {
-                        if (column.title === "Email" && column.value !== null && column.value === bundle.inputData.email  /*'email@email.com' */) {
-                            user.pulse_id = mondayUser.pulse.id
+                        if (column.title === "Email" && column.value !== null && column.value === bundle.inputData.email) {
+                        //if (column.title === "Email" && column.value !== null && column.value === 'email50@email.com') {
+                          user.pulse_id = mondayUser.pulse.id
                             user.email = bundle.inputData.email
                             user.board_id = bundle.inputData.board_id
                             result.push(user)
