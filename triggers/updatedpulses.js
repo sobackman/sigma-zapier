@@ -58,7 +58,7 @@ module.exports = {
   display: {
     // What the user will see in the Zap Editor when selecting an action
     label: 'Updated Pulse Values',
-    description: 'Gets the 25 most recently updated pulses belonging to a board'
+    description: 'Gets the 50 most recently updated pulses belonging to a board'
   },
   operation: {
     inputFields: [
