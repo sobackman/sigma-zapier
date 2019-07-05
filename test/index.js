@@ -8,7 +8,7 @@ const appTester = zapier.createAppTester(App);
 
 describe('My App', () => {
 
-	it('should test something', (done) => {
+	it('should get a pulse', (done) => {
 		const bundle = {};
 
 		appTester(App.searches.pulse.operation.perform, bundle)
@@ -24,18 +24,18 @@ describe('My App', () => {
 	  		}).catch(done);
 	});
 
-	it('should load get pulses', (done) => {
-		const bundle = {};
+	// it('should load get udpated pulses', (done) => {
+	// 	const bundle = {};
 	
-		appTester(App.triggers.pulses.operation.perform, bundle)
-		  .then(results => {
-			should(results.length).above(1);
+	// 	appTester(App.triggers.pulses.operation.perform, bundle)
+	// 	  .then(results => {
+	// 		should(results.length).above(1);
 	
-			const firstResult = results[0];
-			console.log('test result: ', firstResult)
+	// 		const firstResult = results[0];
+	// 		console.log('test result: ', firstResult)
 	
-			done();
-		  })
-		  .catch(done);
-	  });
+	// 		done();
+	// 	  })
+	// 	  .catch(done);
+	//   });
 });

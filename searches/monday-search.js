@@ -10,8 +10,8 @@ let user = {
 const mondaySearch = (z, bundle) => {
     const promise = z.request({
         method: 'GET',
-        url: `https://api.monday.com:443/v1/boards/${bundle.inputData.board_id}/pulses.json?per_page=25&page=${page}`,
-        //url: `https://api.monday.com:443/v1/boards/245325665/pulses.json?page=${page}&per_page=2&api_key=0a373e1e29ff5f2b0fc83444259b1096`,
+        //url: `https://api.monday.com:443/v1/boards/${bundle.inputData.board_id}/pulses.json?per_page=25&page=${page}`,
+        url: `https://api.monday.com:443/v1/boards/245325665/pulses.json?page=${page}&per_page=2&api_key=0a373e1e29ff5f2b0fc83444259b1096`,
         
     })
 
@@ -25,12 +25,13 @@ const mondaySearch = (z, bundle) => {
                 mondayUsers: 
                 for (mondayUser of mondayUsers) {
                     for (column of mondayUser.column_values) {
-                        if (column.title === "Email" && column.value !== null && column.value === bundle.inputData.email) {
-                        //if (column.title === "Email" && column.value !== null && column.value === 'email50@email.com') {
+                        //if (column.title === "Email" && column.value !== null && column.value === bundle.inputData.email) {
+                        if (column.title === "Email" && column.value !== null && column.value === 'email5@email.com') {
                           user.pulse_id = mondayUser.pulse.id
                             user.email = bundle.inputData.email
                             user.board_id = bundle.inputData.board_id
                             result.push(user)
+                            z.console.log(`Type of: ${result.typeOf}`)
                             return result
                         }
                     }

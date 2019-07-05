@@ -30,7 +30,7 @@ const App = {
 
   // beforeRequest & afterResponse are optional hooks into the provided HTTP client
   beforeRequest: [
-   addApiKeyToHeader
+   //addApiKeyToHeader
   ],
 
   afterResponse: [

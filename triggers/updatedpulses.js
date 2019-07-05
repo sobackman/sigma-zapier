@@ -1,17 +1,28 @@
 let counter = 1
-user = {}
-users = []
+let user = {
+  name: '',
+  id: '',
+  status: '',
+  email: ''
+}
+let users = []
+let statusMatchPhrase = 'Status'
 
 const mondayUpdatedPulses = (z, bundle) => {
-  z.console.log('hello from a console log!');
   const promise = z.request({
     method: 'GET',
-    url: `https://api.monday.com:443/v1/boards/${bundle.inputData.board_id}/pulses.json?page=${counter}&per_page=25&order_by=updated_at_desc`,
-    //url: `https://api.monday.com:443/v1/boards/245325665/pulses.json?page=${counter}&per_page=5&order_by=updated_at_desc&api_key=0a373e1e29ff5f2b0fc83444259b1096`,  
+    //url: `https://api.monday.com:443/v1/boards/${bundle.inputData.board_id}/pulses.json?page=${counter}&per_page=25&order_by=updated_at_desc`,
+    url: `https://api.monday.com:443/v1/boards/195336180/pulses.json?page=${counter}&per_page=5&order_by=updated_at_desc&api_key=0a373e1e29ff5f2b0fc83444259b1096`,  
   })
 
-  return promise.then((response) => {
+  promise.then((response) => {
+    if (bundle.inputData.status_column) {
+      statusMatchPhrase.splice(1,1,bundle.inputData.status_column)
+    }
     if (!response.json[0]) {
+      users.push(user)
+      returnUsers = users.slice()
+      users.splice(0)
       return users
     }
     const mondayUsers = response.json
@@ -20,11 +31,11 @@ const mondayUpdatedPulses = (z, bundle) => {
       user.id = mondayUser.pulse.id
       for (column of mondayUser.column_values) {
         switch (column.title) {
-          case 'Status': 
+          case statusMatchPhrase: 
             if (column.value !== null) {
                user.status = column.value.index
                if (column.value.changed_at && column.value.changed_at !== null) {
-                user.id = user.id + column.value.changed_at 
+                user.id = user.id + column.value.changed_at
                }
             }
             break
@@ -42,14 +53,22 @@ const mondayUpdatedPulses = (z, bundle) => {
     }
     // Two pages of pulses have been collected from monday.com
     if( counter === 2 ) {
+      counter = 1
+      returnUsers = [...users]
+      users.splice(0)
+      z.console.log(returnUsers.typeOf)
+      z.console.log(returnUsers)
+      z.console.log(returnUsers[0])
+      z.console.log(users.typeOf)
+      z.console.log(users)
       return users
+      return returnUsers
     }
     else {
       counter++
-      // Collect a second page of pulses from monday.com
       return mondayUpdatedPulses(z, bundle)
     }
-  }) 
+  })
 };
 
 module.exports = {
@@ -67,6 +86,11 @@ module.exports = {
         label: 'Board ID',
         required: true
       },
+      {
+        key: 'status_column',
+        label: 'Status Column',
+        required: false
+      }
     ],
     perform: mondayUpdatedPulses,
     sample: {
