@@ -8,24 +8,24 @@ const appTester = zapier.createAppTester(App);
 
 describe('My App', () => {
 
-	it('should get a pulse', (done) => {
-		const bundle = {};
-
-		appTester(App.searches.pulse.operation.perform, bundle)
-	  		.then(results => {
-				console.log(`Result ${results.length}`)
-			    should(results.length).equal(1);
-
-			    const firstResult = results[0];
-			    console.log('test result: ', firstResult)
-			    should(firstResult.email).eql('email5@email.com');
-
-		    	done();
-	  		}).catch(done);
-	});
-
-	// it('should load get udpated pulses', (done) => {
+	// it('should find a pulse', (done) => {
 	// 	const bundle = {};
+
+	// 	appTester(App.searches.pulse.operation.perform, bundle)
+	//   		.then(results => {
+	// 			console.log(`Result ${results.length}`)
+	// 		    should(results.length).equal(1);
+
+	// 		    const firstResult = results[0];
+	// 		    console.log('test result: ', firstResult)
+	// 		    should(firstResult.email).eql('email5@email.com');
+
+	// 	    	done();
+	//   		}).catch(done);
+	// });
+
+	it('should get updated pulses', (done) => {
+		const bundle = {};
 	
 	// 	appTester(App.triggers.pulses.operation.perform, bundle)
 	// 	  .then(results => {

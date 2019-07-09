@@ -1,12 +1,6 @@
 let counter = 1
-let user = {
-  name: '',
-  id: '',
-  status: '',
-  email: ''
-}
+let user = {}
 let users = []
-let statusMatchPhrase = 'Status'
 
 const mondayUpdatedPulses = (z, bundle) => {
   const promise = z.request({
@@ -20,10 +14,12 @@ const mondayUpdatedPulses = (z, bundle) => {
       statusMatchPhrase.splice(1,1,bundle.inputData.status_column)
     }
     if (!response.json[0]) {
-      users.push(user)
-      returnUsers = users.slice()
-      users.splice(0)
-      return users
+      returnUsers = []
+      returnUsers = users
+      users = []
+      // z.console.log(users)
+      // z.console.log(returnUsers)
+      return returnUsers
     }
     const mondayUsers = response.json
     for (mondayUser of mondayUsers) {
@@ -53,15 +49,11 @@ const mondayUpdatedPulses = (z, bundle) => {
     }
     // Two pages of pulses have been collected from monday.com
     if( counter === 2 ) {
-      counter = 1
-      returnUsers = [...users]
-      users.splice(0)
-      z.console.log(returnUsers.typeOf)
-      z.console.log(returnUsers)
-      z.console.log(returnUsers[0])
-      z.console.log(users.typeOf)
-      z.console.log(users)
-      return users
+      returnUsers = []
+      returnUsers = users.slice()
+      users = []
+      // z.console.log(`Users: ${users}`)
+      // z.console.log(`Return users: ${returnUsers}`)
       return returnUsers
     }
     else {
