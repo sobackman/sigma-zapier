@@ -27,15 +27,14 @@ describe('My App', () => {
 	it('should get updated pulses', (done) => {
 		const bundle = {};
 	
-	// 	appTester(App.triggers.pulses.operation.perform, bundle)
-	// 	  .then(results => {
-	// 		should(results.length).above(1);
+		appTester(App.triggers.pulses.operation.perform, bundle)
+		  .then(results => {
+			should(results.length).above(1);
+			const firstResult = results[0];
+			console.log('test result: ', firstResult)
 	
-	// 		const firstResult = results[0];
-	// 		console.log('test result: ', firstResult)
-	
-	// 		done();
-	// 	  })
-	// 	  .catch(done);
-	//   });
+			done();
+		  })
+		  .catch(done);
+	  });
 });
