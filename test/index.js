@@ -30,7 +30,6 @@ describe('My App', () => {
 		appTester(App.triggers.pulses.operation.perform, bundle)
 		  .then(results => {
 			should(results.length).above(1);
-	
 			const firstResult = results[0];
 			console.log('test result: ', firstResult)
 	
