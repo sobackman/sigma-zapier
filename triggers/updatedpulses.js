@@ -2,6 +2,7 @@ let counter = 1
 let user = {}
 let users = []
 let statusMatchPhrase = 'Status'
+let returnUsers = []
 
 const mondayUpdatedPulses = (z, bundle) => {
   const promise = z.request({
@@ -12,12 +13,10 @@ const mondayUpdatedPulses = (z, bundle) => {
 
   return promise.then((response) => {
     if (bundle.inputData.status_column) {
-      statusMatchPhrase.splice(1,1,bundle.inputData.status_column)
+      statusMatchPhrase = bundle.inputData.status_column
     }
     if (!response.json[0]) {
-      returnUsers = []
-      returnUsers = users
-      users = []
+      saveAndReset()
       return returnUsers
     }
     const mondayUsers = response.json
@@ -48,8 +47,7 @@ const mondayUpdatedPulses = (z, bundle) => {
     }
     // Two pages of pulses have been collected from monday.com
     if( counter === 2 ) {
-      returnUsers = users.slice()
-      users = []
+      saveAndReset()
       return returnUsers
     }
     else {
@@ -58,6 +56,14 @@ const mondayUpdatedPulses = (z, bundle) => {
     }
   })
 };
+
+// This function clears out the values of the valiables so that no old data gets included by mistake
+function saveAndReset() {
+  returnUsers = []
+  returnUsers = users.slice()
+  users = []
+  counter = 1
+}
 
 module.exports = {
   key: 'pulses', 
