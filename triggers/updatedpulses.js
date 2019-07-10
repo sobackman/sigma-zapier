@@ -18,6 +18,7 @@ const mondayUpdatedPulses = (z, bundle) => {
     for (mondayUser of mondayUsers) {
       user.name = mondayUser.pulse.name
       user.id = mondayUser.pulse.id
+      user.pulse_id = mondayUser.pulse.id
       for (column of mondayUser.column_values) {
         switch (column.title) {
           case 'Status': 
@@ -71,6 +72,7 @@ module.exports = {
     perform: mondayUpdatedPulses,
     sample: {
       "id": 1,
+      "puls_id": 1,
       "name": "name",
       "email": "someemail@mail.com",
       "status": "status",
