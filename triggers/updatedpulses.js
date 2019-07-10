@@ -91,6 +91,7 @@ module.exports = {
     perform: mondayUpdatedPulses,
     sample: {
       "id": 1,
+      "puls_id": 1,
       "name": "name",
       "email": "someemail@mail.com",
       "status": "status",
