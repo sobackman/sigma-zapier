@@ -17,6 +17,10 @@ const mondayUpdatedPulses = (z, bundle) => {
     const mondayUsers = response.json
     for (mondayUser of mondayUsers) {
       user.name = mondayUser.pulse.name
+      // The id field is important for zapier to function properly. 
+      // By checking the id zapier decides if there has been changes
+      // If zapier finds a new id (or a changed id, as the ids get changed in this code if a status
+      // has been updated) zapier will include that pulse in the return result
       user.id = mondayUser.pulse.id
       user.pulse_id = mondayUser.pulse.id
       for (column of mondayUser.column_values) {
