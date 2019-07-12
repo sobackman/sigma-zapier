@@ -30,7 +30,9 @@ const App = {
 
   // beforeRequest & afterResponse are optional hooks into the provided HTTP client
   beforeRequest: [
-   addApiKeyToHeader
+    // Comment out this variable (and use the alternate url in the trigger and search) to enable local testing
+    // This variabels enables dynamic fetching of the Monday API key 
+    addApiKeyToHeader
   ],
 
   afterResponse: [
