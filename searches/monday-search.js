@@ -26,8 +26,8 @@ const mondaySearch = (z, bundle) => {
                 mondayUsers: 
                 for (mondayUser of mondayUsers) {
                     for (column of mondayUser.column_values) {
-                        //if (column.title === "Email" && column.value !== null && column.value === bundle.inputData.email) {
-                        if (column.title === "Email" && column.value !== null && column.value === 'email5@email.com') {
+                        if (column.title === "Email" && column.value !== null && column.value === bundle.inputData.email) {
+                        //if (column.title === "Email" && column.value !== null && column.value === 'email5@email.com') {
                           user.pulse_id = mondayUser.pulse.id
                             user.email = bundle.inputData.email
                             user.board_id = bundle.inputData.board_id
