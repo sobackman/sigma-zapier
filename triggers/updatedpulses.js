@@ -9,7 +9,7 @@ const mondayUpdatedPulses = (z, bundle) => {
     method: 'GET',
     url: `https://api.monday.com:443/v1/boards/${bundle.inputData.board_id}/pulses.json?page=${counter}&per_page=25&order_by=updated_at_desc`,
     // url for local testing. Also comment out variable in index.js
-    //url: `https://api.monday.com:443/v1/boards/195336180/pulses.json?page=${counter}&per_page=5&order_by=updated_at_desc&api_key=0a373e1e29ff5f2b0fc83444259b1096`,  
+    //url: `https://api.monday.com:443/v1/boards/195336180/pulses.json?page=${counter}&per_page=5&order_by=updated_at_desc&[API-KEY]`,  
   })
 
   return promise.then((response) => {

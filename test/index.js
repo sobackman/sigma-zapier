@@ -18,7 +18,6 @@ describe('My App', () => {
 
 			    const firstResult = results[0];
 			    console.log('test result: ', firstResult)
-			    should(firstResult.email).eql('email5@email.com');
 
 		    	done();
 	  		}).catch(done);
